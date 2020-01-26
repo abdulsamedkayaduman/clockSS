@@ -1,0 +1,113 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: table;
+    text-align: center;
+    background: black;
+    color:white;
+
+ 
+}
+
+.curTime {
+    position: fixed;
+    float: center;
+    margin-left: 100px ;
+    margin-top: 100px;
+    
+}
+
+
+
+.text {
+    font-size: 60px;
+    color: #464646;
+}
+
+.time {
+    text-align: center;
+    font-size: 150px;
+    color: #D9201C;
+    font-family: Monoton;
+
+
+    float: left;
+    padding: 5px;
+    margin-top: 100px;
+    letter-spacing: 25px;
+}
+
+#second {
+    color: #7D1213;
+}
+
+.bracketL {
+    text-align: center;
+    font-size: 300px;
+    color: #7D1213;
+    font-family: Monoton;
+    float: left;
+    padding: 20px;
+    margin-right: 95px;
+
+}
+
+.bracketR {
+    text-align: center;
+    font-size: 300px;
+    color: #7D1213;
+    font-family: Monoton;
+    float: left;
+    padding: 20px;
+    position: absolute;
+    left: 1200px;
+}
+
+.date {
+    text-align: center;
+    font-size: 60px;
+    color: #FF1D25;
+    font-family: Monoton;
+    float: left;
+    padding: 20px;
+    position: absolute;
+    top: 275px;
+    left: 350px;
+
+
+}
+
+/*
+**Button
+**Style
+*/
+.buttons{
+    display: block;
+    position: inherit;
+}
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: black;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button2 {
+  background-color: black; 
+  color:white ; 
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
