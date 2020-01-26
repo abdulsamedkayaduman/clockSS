@@ -6,6 +6,15 @@
 
 var flag;
 var dateFlag;
+var urlGet = 'http://abdulsamed.me/ipblock/getmargin?user=';
+var urlPost = 'http://abdulsamed.me/ipblock/setmargin';
+var urlString =window.location.href;
+var urlParse = new URL(urlString);
+var username = urlParse.searchParams.get("user");
+var marginTop = "200px" ;
+var marginLeft = "200px";
+console.log(username);
+
 
 function startTime() {
     var hour = document.getElementById('hour');
@@ -70,23 +79,36 @@ function date() {
 
 var curTimeId = document.getElementById('curTimeId');
 
-const element = document.querySelector('.curTime');
-const style = getComputedStyle(element)
 
 
-if(!getCookie("marginTop"))
-var marginTop = style.marginTop ;
-else var marginTop=getCookie('marginTop');
+var getRequest = new XMLHttpRequest(); 
+getRequest.open('GET', urlGet+username, true);
+getRequest.send();
 
-if(!getCookie('marginLeft'))
-var marginLeft = style.marginLeft;
-else var marginLeft=getCookie('marginLeft');
+ getRequest.onload = function () {
+ 	console.log(this.response);
+ 	var data = JSON.parse(this.response)
+ 	console.log("request.onload");
+ 	 
+   //request.onreadystatechange = function() {
+ 	console.log("request.onreadystatechange");
+  if (this.readyState == 4 && this.status == 200) {
+    data.forEach(function(object) {
+      console.log(object.margin_left+"  , "+object.margin_top+"  ,  "+object.cdate);
+      marginTop = object.margin_top+"px" ;
+	  marginLeft = object.margin_left+"px";
+	  curTimeId.style.marginTop=marginTop;
+      curTimeId.style.marginLeft=marginLeft;
+      console.log(marginLeft+" "+marginTop);
+	});
+  }
+}
 
 
-curTimeId.style.marginTop=marginTop;
-curTimeId.style.marginLeft=marginLeft;
 
-console.log(marginLeft+" "+marginTop);
+
+
+
 
 console.log(parseInt("40px", 10) + 1 + "px"); // 2em;
 
@@ -100,8 +122,7 @@ function moveCurTimeID(direction , value){
         curTimeId.style.marginLeft=marginLeft;
     }
     console.log("marginLeft= "+marginLeft + " marginTop= "+marginTop);
-    setCookie("marginTop",marginTop);
-    setCookie("marginLeft",marginLeft );
+
 
 
 }
@@ -147,8 +168,10 @@ function checkKey(e) {
        // right arrow
        moveright();
     }
-
-     
+    else if (e.keyCode == '13') {
+       // right arrow
+       setMargin(parseInt(marginTop, 10),parseInt(marginLeft, 10));
+    }     
     
 
 
@@ -160,35 +183,24 @@ function checkKey(e) {
  */
 
 
-function setCookie(name, value) {
-  document.cookie = name+"=" + value +";path=/";
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function checkCookie() {
-  var user = getCookie("username");
-  if (user != "") {
-    alert("Welcome again " + user);
-  } else {
-    user = prompt("Please enter your name:", "");
-    if (user != "" && user != null) {
-      setCookie("username", user, 365);
-    }
-  }
-}
 
  
+ /*
+ ** Api Post data
+ */
+
+
+ function setMargin(marginTop,marginLeft){
+ 	var xhr = new XMLHttpRequest();
+	xhr.open("POST", urlPost, true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.send(JSON.stringify({
+    "username": username,
+    "margintop":marginTop,
+    "marginleft":marginLeft
+
+	}));
+ }
+ 
+
+
