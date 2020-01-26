@@ -1,4 +1,9 @@
-// JavaScript Document
+/*
+** Author	:Abdulsamed Kayaduman
+** Date 	:26.01.2020	
+** Type 	:JavaScript Document
+*/
+
 var flag;
 var dateFlag;
 
